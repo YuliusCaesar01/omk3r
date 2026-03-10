@@ -1,0 +1,1682 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>OMK Katedral Kristus Raja Purwokerto</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400&family=DM+Sans:wght@300;400;500&family=Cinzel:wght@400;600&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="apple-touch-icon.png">
+  <style>
+    :root {
+      --gold: #C9973A;
+      --gold-light: #E8C06A;
+      --gold-pale: #F5E6C8;
+      --deep: #1A1208;
+      --dark: #2C1F0E;
+      --brown: #4A3418;
+      --cream: #FAF5EC;
+      --white: #FFFDF8;
+      --text: #3A2A12;
+      --text-soft: #7A6040;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    /* ── NOISE TEXTURE OVERLAY ── */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      pointer-events: none;
+      z-index: 9999;
+    }
+
+    /* ── NAVBAR ── */
+    nav {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      z-index: 100;
+      padding: 1.25rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      transition: background 0.4s, backdrop-filter 0.4s;
+    }
+    nav.scrolled {
+      background: rgba(26,18,8,0.85);
+      backdrop-filter: blur(16px);
+    }
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+    .nav-logo .cross {
+      width: 28px;
+      height: 28px;
+      position: relative;
+      flex-shrink: 0;
+    }
+    .nav-logo .cross::before,
+    .nav-logo .cross::after {
+      content: '';
+      position: absolute;
+      background: var(--gold);
+      border-radius: 2px;
+    }
+    .nav-logo .cross::before { width: 4px; height: 100%; left: 50%; transform: translateX(-50%); }
+    .nav-logo .cross::after  { width: 100%; height: 4px; top: 35%; }
+    .nav-logo span {
+      font-family: 'Cinzel', serif;
+      font-size: 0.85rem;
+      color: var(--gold-light);
+      letter-spacing: 0.08em;
+      line-height: 1.3;
+    }
+    .nav-links {
+      display: flex;
+      gap: 2rem;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 0.82rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--gold-pale);
+      text-decoration: none;
+      position: relative;
+      transition: color 0.3s;
+    }
+    .nav-links a::after {
+      content: '';
+      position: absolute;
+      bottom: -3px; left: 0;
+      width: 0; height: 1px;
+      background: var(--gold);
+      transition: width 0.3s;
+    }
+    .nav-links a:hover { color: var(--gold-light); }
+    .nav-links a:hover::after { width: 100%; }
+
+    .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+    .hamburger span { width: 24px; height: 2px; background: var(--gold-light); transition: all 0.3s; }
+
+    /* ── HERO ── */
+    #hero {
+      position: relative;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      overflow: hidden;
+      background: var(--deep);
+    }
+
+    .hero-bg {
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 30% 50%, #3A1F00 0%, #1A1208 70%);
+    }
+
+    /* Cathedral window-inspired decorative arcs */
+    .hero-arc {
+      position: absolute;
+      right: -5%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 55vw;
+      height: 90vh;
+      border: 1px solid rgba(201,151,58,0.12);
+      border-radius: 50% 50% 0 0 / 30% 30% 0 0;
+      animation: pulse-arc 6s ease-in-out infinite;
+    }
+    .hero-arc:nth-child(2) {
+      width: 48vw; height: 80vh;
+      border-color: rgba(201,151,58,0.18);
+      animation-delay: 1s;
+    }
+    .hero-arc:nth-child(3) {
+      width: 38vw; height: 65vh;
+      border-color: rgba(201,151,58,0.25);
+      animation-delay: 2s;
+    }
+    @keyframes pulse-arc {
+      0%, 100% { opacity: 0.6; }
+      50% { opacity: 1; }
+    }
+
+    /* Golden rays from center */
+    .hero-rays {
+      position: absolute;
+      right: 10%;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 42vw;
+      height: 42vw;
+      opacity: 0.06;
+      background: conic-gradient(from 0deg, var(--gold) 0deg, transparent 5deg, var(--gold) 10deg, transparent 15deg, var(--gold) 20deg, transparent 25deg, var(--gold) 30deg, transparent 35deg, var(--gold) 40deg, transparent 45deg, var(--gold) 50deg, transparent 55deg, var(--gold) 60deg, transparent 65deg, var(--gold) 70deg, transparent 75deg, var(--gold) 80deg, transparent 85deg, var(--gold) 90deg, transparent 95deg, var(--gold) 100deg, transparent 105deg, var(--gold) 110deg, transparent 115deg, var(--gold) 120deg, transparent 125deg, var(--gold) 130deg, transparent 135deg, var(--gold) 140deg, transparent 145deg, var(--gold) 150deg, transparent 155deg, var(--gold) 160deg, transparent 165deg, var(--gold) 170deg, transparent 175deg, var(--gold) 180deg, transparent 185deg, var(--gold) 190deg, transparent 195deg, var(--gold) 200deg, transparent 205deg, var(--gold) 210deg, transparent 215deg, var(--gold) 220deg, transparent 225deg, var(--gold) 230deg, transparent 235deg, var(--gold) 240deg, transparent 245deg, var(--gold) 250deg, transparent 255deg, var(--gold) 260deg, transparent 265deg, var(--gold) 270deg, transparent 275deg, var(--gold) 280deg, transparent 285deg, var(--gold) 290deg, transparent 295deg, var(--gold) 300deg, transparent 305deg, var(--gold) 310deg, transparent 315deg, var(--gold) 320deg, transparent 325deg, var(--gold) 330deg, transparent 335deg, var(--gold) 340deg, transparent 345deg, var(--gold) 350deg, transparent 355deg);
+      border-radius: 50%;
+      animation: spin-rays 60s linear infinite;
+    }
+    @keyframes spin-rays { to { transform: translateY(-50%) rotate(360deg); } }
+
+    .hero-content {
+      position: relative;
+      z-index: 2;
+      padding: 8rem 2.5rem 4rem;
+      max-width: 680px;
+    }
+
+    .hero-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.3s;
+    }
+    .hero-tag::before {
+      content: '';
+      width: 30px; height: 1px;
+      background: var(--gold);
+    }
+
+    .hero-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(3rem, 6vw, 5.5rem);
+      font-weight: 300;
+      line-height: 1.1;
+      color: var(--white);
+      margin-bottom: 0.3rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.5s;
+    }
+    .hero-title em {
+      font-style: italic;
+      color: var(--gold-light);
+    }
+    .hero-title .bold {
+      font-weight: 600;
+      display: block;
+    }
+
+    .hero-subtitle {
+      font-family: 'Cinzel', serif;
+      font-size: clamp(0.9rem, 1.5vw, 1.1rem);
+      letter-spacing: 0.15em;
+      color: var(--gold);
+      margin-bottom: 1.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.7s;
+    }
+
+    .hero-desc {
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(245,230,200,0.75);
+      max-width: 480px;
+      margin-bottom: 2.5rem;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 0.9s;
+    }
+
+    .hero-ctas {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+      opacity: 0;
+      animation: fadeUp 0.8s ease forwards 1.1s;
+    }
+
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      background: var(--gold);
+      color: var(--deep);
+      font-size: 0.82rem;
+      font-weight: 500;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .btn-primary:hover {
+      background: var(--gold-light);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 24px rgba(201,151,58,0.4);
+    }
+
+    .btn-ghost {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.85rem 2rem;
+      border: 1px solid rgba(201,151,58,0.5);
+      color: var(--gold-pale);
+      font-size: 0.82rem;
+      font-weight: 400;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      text-decoration: none;
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .btn-ghost:hover {
+      border-color: var(--gold);
+      color: var(--gold-light);
+      background: rgba(201,151,58,0.08);
+    }
+
+    .scroll-hint {
+      position: absolute;
+      bottom: 2rem;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(201,151,58,0.6);
+      font-size: 0.68rem;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      animation: fadeIn 1s ease forwards 2s, bounce 2s ease-in-out infinite 3s;
+      opacity: 0;
+    }
+    .scroll-hint svg { width: 20px; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; } to { opacity: 1; }
+    }
+    @keyframes bounce {
+      0%, 100% { transform: translateX(-50%) translateY(0); }
+      50% { transform: translateX(-50%) translateY(8px); }
+    }
+
+    /* ── SECTION BASE ── */
+    section {
+      padding: 6rem 2.5rem;
+    }
+    .section-inner {
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .section-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 0.75rem;
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+    }
+    .section-label::after {
+      content: '';
+      flex: 1;
+      max-width: 40px;
+      height: 1px;
+      background: var(--gold);
+    }
+    .section-title {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: clamp(2rem, 4vw, 3.2rem);
+      font-weight: 300;
+      line-height: 1.2;
+      color: var(--dark);
+      margin-bottom: 1rem;
+    }
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    /* ── ABOUT ── */
+    #about {
+      background: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    #about::before {
+      content: 'OMK';
+      position: absolute;
+      right: -2rem;
+      top: 50%;
+      transform: translateY(-50%);
+      font-family: 'Cinzel', serif;
+      font-size: 20vw;
+      color: rgba(201,151,58,0.04);
+      line-height: 1;
+      pointer-events: none;
+      user-select: none;
+    }
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5rem;
+      align-items: center;
+    }
+    .about-text p {
+      font-size: 1.05rem;
+      line-height: 1.85;
+      color: var(--text-soft);
+      margin-bottom: 1.25rem;
+    }
+    .about-text p strong { color: var(--text); font-weight: 500; }
+
+    .about-pillars {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.25rem;
+    }
+    .pillar {
+      padding: 1.5rem;
+      border: 1px solid rgba(201,151,58,0.2);
+      border-radius: 4px;
+      background: var(--cream);
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .pillar::before {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0;
+      width: 0; height: 2px;
+      background: var(--gold);
+      transition: width 0.4s;
+    }
+    .pillar:hover { transform: translateY(-4px); box-shadow: 0 12px 30px rgba(74,52,24,0.1); }
+    .pillar:hover::before { width: 100%; }
+    .pillar-icon { font-size: 1.8rem; margin-bottom: 0.75rem; }
+    .pillar h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.35rem;
+    }
+    .pillar p { font-size: 0.85rem; color: var(--text-soft); line-height: 1.6; }
+
+    /* ── ACTIVITIES ── */
+    #kegiatan {
+      background: var(--cream);
+    }
+    .activities-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      margin-bottom: 3rem;
+    }
+    .activities-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+    }
+
+    .activity-card {
+      background: var(--white);
+      border-radius: 4px;
+      overflow: hidden;
+      transition: all 0.35s;
+      border: 1px solid rgba(201,151,58,0.1);
+      cursor: pointer;
+    }
+    .activity-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 50px rgba(74,52,24,0.12);
+    }
+
+    .activity-img {
+      height: 200px;
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Unique illustrated backgrounds per card */
+    .activity-img.misa {
+      background: linear-gradient(135deg, #1A1208 0%, #3A1F00 100%);
+    }
+    .activity-img.misa::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 70%, rgba(201,151,58,0.3) 0%, transparent 60%);
+    }
+
+    .activity-img.rekoleksi {
+      background: linear-gradient(135deg, #0E1A10 0%, #142A18 100%);
+    }
+    .activity-img.rekoleksi::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 40%, rgba(100,200,100,0.15) 0%, transparent 70%);
+    }
+
+    .activity-img.sosial {
+      background: linear-gradient(135deg, #0E1018 0%, #141A2E 100%);
+    }
+    .activity-img.sosial::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 30% 60%, rgba(100,130,220,0.2) 0%, transparent 70%);
+    }
+
+    .activity-img.seni {
+      background: linear-gradient(135deg, #1A0E18 0%, #2E141E 100%);
+    }
+    .activity-img.seni::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 70% 30%, rgba(220,100,150,0.2) 0%, transparent 60%);
+    }
+
+    .activity-img.olahraga {
+      background: linear-gradient(135deg, #0E180E 0%, #142A1A 100%);
+    }
+    .activity-img.olahraga::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 50%, rgba(100,220,130,0.15) 0%, transparent 60%);
+    }
+
+    .activity-img.rohani {
+      background: linear-gradient(135deg, #180E0E 0%, #2A1414 100%);
+    }
+    .activity-img.rohani::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle at 50% 30%, rgba(220,180,80,0.25) 0%, transparent 60%);
+    }
+
+    .activity-img-icon {
+      font-size: 3.5rem;
+      position: relative;
+      z-index: 1;
+      filter: drop-shadow(0 4px 12px rgba(0,0,0,0.5));
+    }
+
+    .activity-badge {
+      position: absolute;
+      top: 1rem; right: 1rem;
+      background: rgba(201,151,58,0.9);
+      color: var(--deep);
+      font-size: 0.65rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      padding: 0.25rem 0.65rem;
+      border-radius: 2px;
+    }
+
+    .activity-body {
+      padding: 1.5rem;
+    }
+    .activity-body h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: var(--dark);
+      margin-bottom: 0.5rem;
+    }
+    .activity-body p {
+      font-size: 0.88rem;
+      line-height: 1.65;
+      color: var(--text-soft);
+      margin-bottom: 1rem;
+    }
+    .activity-meta {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      font-size: 0.78rem;
+      color: var(--text-soft);
+    }
+    .activity-meta span { display: flex; align-items: center; gap: 0.35rem; }
+
+    /* ── DOKUMENTASI ── */
+    #dokumentasi {
+      background: var(--dark);
+      position: relative;
+      overflow: hidden;
+    }
+    #dokumentasi .section-title { color: var(--cream); }
+    #dokumentasi .section-label { color: var(--gold); }
+
+    .gallery-filter {
+      display: flex;
+      gap: 0.75rem;
+      margin-bottom: 2rem;
+      flex-wrap: wrap;
+    }
+    .filter-btn {
+      padding: 0.5rem 1.25rem;
+      border: 1px solid rgba(201,151,58,0.3);
+      background: transparent;
+      color: rgba(245,230,200,0.7);
+      font-size: 0.78rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      cursor: pointer;
+      border-radius: 2px;
+      transition: all 0.3s;
+      font-family: 'DM Sans', sans-serif;
+    }
+    .filter-btn.active,
+    .filter-btn:hover {
+      background: var(--gold);
+      border-color: var(--gold);
+      color: var(--deep);
+    }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 200px;
+      grid-auto-flow: row dense;
+      gap: 0.75rem;
+    }
+
+    .gallery-item {
+      border-radius: 4px;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+      transition: all 0.35s;
+      background: var(--brown);
+    }
+
+    /* Pola bento rapi - dense flow mengisi gap otomatis */
+    .gallery-item:nth-child(1)  { grid-column: span 2; }
+    .gallery-item:nth-child(6)  { grid-column: span 2; }
+    .gallery-item:nth-child(9)  { grid-row: span 2; }
+    .gallery-item:nth-child(13) { grid-column: span 2; }
+    .gallery-item:nth-child(16) { grid-row: span 2; }
+    .gallery-item:nth-child(19) { grid-column: span 2; }
+
+    .gallery-item-inner {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      position: relative;
+      transition: transform 0.4s;
+    }
+    .gallery-item:hover .gallery-item-inner { transform: scale(1.05); }
+
+    /* Real photo support */
+    .gallery-item-inner img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+      background: linear-gradient(90deg, #1a1a2e 25%, #25253d 50%, #1a1a2e 75%);
+      background-size: 200% 100%;
+      animation: shimmer 1.5s infinite;
+      min-height: 180px;
+      transition: opacity 0.4s ease;
+      opacity: 0;
+    }
+
+    .gallery-item-inner img.loaded {
+      opacity: 1;
+      animation: none;
+      background: none;
+    }
+
+    @keyframes shimmer {
+      0% { background-position: 200% 0; }
+      100% { background-position: -200% 0; }
+    }
+
+    /* Zoom icon on hover */
+    .overlay-zoom {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 2px solid rgba(255,255,255,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 0.75rem;
+      opacity: 0;
+      transform: scale(0.7);
+      transition: all 0.35s;
+      color: white;
+      font-size: 1.2rem;
+    }
+    .gallery-item:hover .overlay-zoom {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    .gallery-item .overlay {
+      position: absolute;
+      inset: 0;
+      background: rgba(26,18,8,0);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.35s;
+      padding: 1rem;
+      text-align: center;
+    }
+    .gallery-item:hover .overlay {
+      background: rgba(26,18,8,0.75);
+    }
+    .overlay-text {
+      color: var(--white);
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1rem;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.35s;
+    }
+    .overlay-sub {
+      color: var(--gold-light);
+      font-size: 0.75rem;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: all 0.35s 0.05s;
+      margin-top: 0.25rem;
+    }
+    .gallery-item:hover .overlay-text,
+    .gallery-item:hover .overlay-sub {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── PENGUMUMAN ── */
+    #pengumuman {
+      background: var(--white);
+    }
+    .announcements-layout {
+      display: grid;
+      grid-template-columns: 2fr 1fr;
+      gap: 3rem;
+      margin-top: 3rem;
+    }
+    .announcement-featured {
+      background: var(--dark);
+      border-radius: 6px;
+      overflow: hidden;
+      color: var(--white);
+      position: relative;
+      padding: 3rem;
+      min-height: 320px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+    }
+    .announcement-featured::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(to top, rgba(26,18,8,0.95) 40%, transparent 100%),
+                  radial-gradient(circle at 70% 20%, rgba(201,151,58,0.2) 0%, transparent 60%);
+    }
+    .featured-label {
+      position: absolute;
+      top: 1.5rem; left: 1.5rem;
+      background: var(--gold);
+      color: var(--deep);
+      font-size: 0.65rem;
+      font-weight: 700;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 0.3rem 0.8rem;
+      border-radius: 2px;
+    }
+    .featured-icon {
+      font-size: 4rem;
+      position: absolute;
+      top: 1rem;
+      right: 2rem;
+      opacity: 0.3;
+    }
+    .announcement-featured .date {
+      position: relative;
+      z-index: 1;
+      font-size: 0.75rem;
+      color: var(--gold-light);
+      letter-spacing: 0.1em;
+      margin-bottom: 0.75rem;
+    }
+    .announcement-featured h3 {
+      position: relative;
+      z-index: 1;
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.8rem;
+      font-weight: 300;
+      line-height: 1.3;
+      margin-bottom: 0.75rem;
+    }
+    .announcement-featured p {
+      position: relative;
+      z-index: 1;
+      font-size: 0.9rem;
+      color: rgba(245,230,200,0.75);
+      line-height: 1.65;
+      margin-bottom: 1.5rem;
+    }
+    .announcements-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    .ann-item {
+      padding: 1.25rem;
+      border: 1px solid rgba(201,151,58,0.15);
+      border-radius: 4px;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+      transition: all 0.3s;
+      cursor: pointer;
+      text-decoration: none;
+      color: inherit;
+    }
+    .ann-item:hover {
+      border-color: var(--gold);
+      background: var(--cream);
+      transform: translateX(4px);
+    }
+    .ann-date-box {
+      flex-shrink: 0;
+      width: 48px;
+      text-align: center;
+      background: var(--cream);
+      border-radius: 4px;
+      padding: 0.4rem;
+    }
+    .ann-date-box .day {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--gold);
+      line-height: 1;
+    }
+    .ann-date-box .month {
+      font-size: 0.65rem;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--text-soft);
+    }
+    .ann-content h4 {
+      font-size: 0.92rem;
+      font-weight: 500;
+      color: var(--dark);
+      margin-bottom: 0.25rem;
+      line-height: 1.4;
+    }
+    .ann-content p {
+      font-size: 0.8rem;
+      color: var(--text-soft);
+      line-height: 1.5;
+    }
+
+    /* ── CONTACT ── */
+    #kontak {
+      background: var(--deep);
+      position: relative;
+      overflow: hidden;
+    }
+    #kontak::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 60% 50% at 50% 100%, rgba(201,151,58,0.08) 0%, transparent 70%);
+    }
+    #kontak .section-title { color: var(--cream); }
+    #kontak .section-label { color: var(--gold); }
+
+    .contact-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 1.5rem;
+      margin-top: 3rem;
+    }
+    .contact-card {
+      padding: 2rem;
+      border: 1px solid rgba(201,151,58,0.15);
+      border-radius: 4px;
+      text-align: center;
+      transition: all 0.3s;
+    }
+    .contact-card:hover {
+      border-color: rgba(201,151,58,0.5);
+      background: rgba(201,151,58,0.05);
+    }
+    .contact-card .icon { font-size: 2rem; margin-bottom: 1rem; }
+    .contact-card h3 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--gold-light);
+      margin-bottom: 0.5rem;
+    }
+    .contact-card p {
+      font-size: 0.88rem;
+      color: rgba(245,230,200,0.65);
+      line-height: 1.6;
+    }
+    .contact-card a {
+      color: var(--gold);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .contact-card a:hover { color: var(--gold-light); }
+
+    .contact-desc {
+      text-align: center;
+      max-width: 560px;
+      margin: 0 auto 1rem;
+      font-size: 1rem;
+      line-height: 1.75;
+      color: rgba(245,230,200,0.65);
+    }
+
+    /* ── FOOTER ── */
+    footer {
+      background: var(--deep);
+      border-top: 1px solid rgba(201,151,58,0.12);
+      padding: 2rem 2.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: gap;
+    }
+    .footer-copy {
+      font-size: 0.8rem;
+      color: rgba(245,230,200,0.4);
+    }
+    .footer-copy span { color: var(--gold); }
+    .footer-links {
+      display: flex;
+      gap: 1.5rem;
+      list-style: none;
+    }
+    .footer-links a {
+      font-size: 0.78rem;
+      color: rgba(245,230,200,0.4);
+      text-decoration: none;
+      transition: color 0.2s;
+    }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── REVEAL ANIMATIONS ── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(30px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ── MOBILE NAV ── */
+    .mobile-menu {
+      position: fixed;
+      inset: 0;
+      background: rgba(26,18,8,0.97);
+      z-index: 99;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2rem;
+      transform: translateX(100%);
+      transition: transform 0.4s cubic-bezier(0.76, 0, 0.24, 1);
+    }
+    .mobile-menu.open { transform: translateX(0); }
+    .mobile-menu a {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 2rem;
+      color: var(--gold-light);
+      text-decoration: none;
+      letter-spacing: 0.05em;
+      transition: color 0.2s;
+    }
+    .mobile-menu a:hover { color: var(--gold); }
+    .mobile-close {
+      position: absolute;
+      top: 1.5rem; right: 1.5rem;
+      background: none;
+      border: none;
+      color: var(--gold);
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+
+    /* ── LIGHTBOX ── */
+    .lightbox {
+      display: none;
+      position: fixed;
+      inset: 0;
+      z-index: 9000;
+      background: rgba(10, 6, 2, 0.95);
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      animation: fadeIn 0.25s ease;
+    }
+    .lightbox.open { display: flex; }
+
+    .lightbox-inner {
+      position: relative;
+      max-width: 900px;
+      width: 100%;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 1rem;
+    }
+
+    .lightbox-img-wrap {
+      width: 100%;
+      max-height: 75vh;
+      border-radius: 4px;
+      overflow: hidden;
+      background: var(--dark);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .lightbox-img-wrap img {
+      max-width: 100%;
+      max-height: 75vh;
+      object-fit: contain;
+      display: block;
+    }
+    .lightbox-caption {
+      text-align: center;
+    }
+    .lightbox-caption h4 {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.2rem;
+      color: var(--cream);
+      margin-bottom: 0.25rem;
+    }
+    .lightbox-caption p {
+      font-size: 0.8rem;
+      color: var(--gold);
+      letter-spacing: 0.1em;
+    }
+    .lightbox-close {
+      position: absolute;
+      top: -2.5rem;
+      right: 0;
+      background: none;
+      border: none;
+      color: var(--gold-pale);
+      font-size: 1.5rem;
+      cursor: pointer;
+      line-height: 1;
+      transition: color 0.2s;
+    }
+    .lightbox-close:hover { color: var(--gold); }
+
+    .lightbox-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(201,151,58,0.15);
+      border: 1px solid rgba(201,151,58,0.3);
+      color: var(--gold-light);
+      font-size: 1.5rem;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.25s;
+      user-select: none;
+    }
+    .lightbox-nav:hover { background: rgba(201,151,58,0.35); }
+    .lightbox-nav.prev { left: -3.5rem; }
+    .lightbox-nav.next { right: -3.5rem; }
+
+    @media (max-width: 700px) {
+      .lightbox-nav.prev { left: 0.25rem; }
+      .lightbox-nav.next { right: 0.25rem; }
+    }
+
+    /* Panduan ganti foto */
+    .gallery-guide {
+      margin-bottom: 1.5rem;
+      padding: 0.85rem 1.25rem;
+      border: 1px dashed rgba(201,151,58,0.3);
+      border-radius: 4px;
+      font-size: 0.8rem;
+      color: rgba(245,230,200,0.5);
+      line-height: 1.6;
+    }
+    .gallery-guide strong { color: var(--gold); }
+    .gallery-guide code {
+      background: rgba(201,151,58,0.1);
+      padding: 0.1em 0.4em;
+      border-radius: 3px;
+      font-size: 0.78rem;
+    }
+
+    /* ── RESPONSIF ── */
+    @media (max-width: 900px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .activities-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      /* Reset semua span agar tidak ada gap di tablet */
+      .gallery-item:nth-child(n) { grid-column: span 1; grid-row: span 1; }
+      .gallery-item:nth-child(odd) { grid-column: span 1; }
+      .announcements-layout { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr 1fr; }
+    }
+
+    @media (max-width: 600px) {
+      nav { padding: 1rem 1.25rem; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+      section { padding: 4rem 1.25rem; }
+      .activities-grid { grid-template-columns: 1fr; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-pillars { grid-template-columns: 1fr; }
+      .contact-grid { grid-template-columns: 1fr; }
+      footer { flex-direction: column; gap: 1rem; text-align: center; }
+      .hero-content { padding: 7rem 1.25rem 3rem; }
+      .activities-header { flex-direction: column; align-items: flex-start; gap: 1rem; }
+    }
+
+    .activity-img {
+      width: 100%;
+      height: 200px; /* sesuaikan dengan desain kamu */
+      overflow: hidden;
+      border-radius: 12px 12px 0 0; /* jika card punya rounded top */
+    }
+
+    .activity-img img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.4s ease;
+    }
+
+    .activity-card:hover .activity-img img {
+      transform: scale(1.05); /* efek zoom halus saat hover */
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAVBAR -->
+  <nav id="navbar">
+    <a href="#hero" class="nav-logo">
+      <div class="cross"></div>
+      <span>OMK<br>Kristus Raja</span>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#kegiatan">Kegiatan</a></li>
+      <li><a href="#dokumentasi">Dokumentasi</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </nav>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <button class="mobile-close" onclick="toggleMenu()">✕</button>
+    <a href="#about" onclick="toggleMenu()">Tentang</a>
+    <a href="#kegiatan" onclick="toggleMenu()">Kegiatan</a>
+    <a href="#dokumentasi" onclick="toggleMenu()">Dokumentasi</a>
+    <a href="#pengumuman" onclick="toggleMenu()">Pengumuman</a>
+    <a href="#kontak" onclick="toggleMenu()">Kontak</a>
+  </div>
+
+  <!-- HERO -->
+  <section id="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-rays"></div>
+    <div class="hero-arc"></div>
+    <div class="hero-arc" style="right:-10%;opacity:0.7"></div>
+    <div class="hero-arc" style="right:-15%;opacity:0.5"></div>
+
+    <div class="hero-content">
+      <div class="hero-tag">Orang Muda Katolik</div>
+      <h1 class="hero-title">
+        Kristus Raja<br>
+        <em class="bold">Purwokerto</em>
+      </h1>
+      <p class="hero-subtitle">Katedral Kristus Raja</p>
+      <p class="hero-desc">
+        Komunitas orang muda yang beriman, bersaudara, dan berkarya. Bersama kita tumbuh dalam kasih Kristus dan melayani sesama.
+      </p>
+      <div class="hero-ctas">
+        <a href="#kegiatan" class="btn-primary">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Lihat Kegiatan
+        </a>
+        <a href="#kontak" class="btn-ghost">Bergabung</a>
+      </div>
+    </div>
+
+    <div class="scroll-hint">
+      <span>Gulir ke bawah</span>
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+        <path d="M12 5v14M5 12l7 7 7-7"/>
+      </svg>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="section-inner">
+      <div class="about-grid">
+        <div class="about-text reveal">
+          <p class="section-label">Siapa Kami</p>
+          <h2 class="section-title">Muda dalam <em>Iman</em>,<br>Kuat dalam Kasih</h2>
+          <p>
+            <strong>OMK Katedral Kristus Raja Purwokerto</strong> adalah komunitas orang muda katolik yang bernaung di bawah Paroki Katedral Kristus Raja, Purwokerto, Jawa Tengah.
+          </p>
+          <p>
+            Kami percaya bahwa pemuda adalah masa depan Gereja. Melalui kegiatan rohani, sosial, seni, dan olahraga, kami membentuk generasi Katolik yang berkarakter, beriman mendalam, dan peka terhadap sesama.
+          </p>
+          <p>
+            Bergabunglah bersama kami — karena bersama, kita lebih kuat. ✝️
+          </p>
+        </div>
+        <div class="about-pillars reveal" style="transition-delay:0.2s">
+          <div class="pillar">
+            <div class="pillar-icon">🙏</div>
+            <h3>Iman</h3>
+            <p>Memperdalam relasi dengan Tuhan melalui doa, misa, dan renungan bersama.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">🤝</div>
+            <h3>Persaudaraan</h3>
+            <p>Membangun komunitas yang hangat, inklusif, dan saling mendukung.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">💛</div>
+            <h3>Pelayanan</h3>
+            <p>Mewujudkan kasih Kristus melalui aksi sosial dan kepedulian terhadap sesama.</p>
+          </div>
+          <div class="pillar">
+            <div class="pillar-icon">🌟</div>
+            <h3>Pengembangan</h3>
+            <p>Menggali potensi diri melalui kegiatan seni, olahraga, dan kreativitas.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- KEGIATAN -->
+  <section id="kegiatan">
+    <div class="section-inner">
+      <div class="activities-header reveal">
+        <div>
+          <p class="section-label">Kegiatan Kami</p>
+          <h2 class="section-title">Kegiatan <em>OMK</em></h2>
+        </div>
+      </div>
+
+      <div class="activities-grid">
+        <div class="activity-card reveal">
+          <div class="activity-img misa">
+            <img
+              src="foto/misa.jpeg"
+              alt="Misa OMK"
+              loading="lazy"
+            />
+          </div>
+          <div class="activity-body">
+            <h3>Misa OMK</h3>
+            <p>Perayaan Ekaristi bersama orang muda dipenuhi pujian dengan semangat penuh iman.</p>
+          </div>
+        </div>
+
+        <div class="activity-card reveal" style="transition-delay:0.1s">
+          <div class="activity-img rekoleksi">
+            <img
+              src="foto/rekoleksi.jpeg"
+              alt="Rekoleksi & Retret"
+              loading="lazy"
+            />
+          </div>
+          <div class="activity-body">
+            <h3>Rekoleksi & Retret</h3>
+            <p>Waktu khusus untuk berefleksi, memperdalam iman, dan mempererat persaudaraan dalam komunitas.</p>
+          </div>
+        </div>
+
+        <div class="activity-card reveal" style="transition-delay:0.2s">
+          <div class="activity-img sosial">
+            <img
+              src="foto/aksi.jpeg"
+              alt="Aksi Sosial"
+              loading="lazy"
+            />
+          </div>
+          <div class="activity-body">
+            <h3>Aksi Sosial</h3>
+            <p>Kunjungan panti, bakti sosial, dan berbagi kasih kepada mereka yang membutuhkan di sekitar Purwokerto.</p>
+          </div>
+        </div>
+
+        <div class="activity-card reveal" style="transition-delay:0.1s">
+          <div class="activity-img seni">
+            <img
+              src="foto/koor.jpeg"
+              alt="Tim Liturgi & Seni"
+              loading="lazy"
+            />
+          </div>
+          <div class="activity-body">
+            <h3>Koor</h3>
+            <p>Melayani Tuhan lewat paduan suara koor dalam misa ekaristi.</p>
+          </div>
+        </div>
+
+        <div class="activity-card reveal" style="transition-delay:0.2s">
+          <div class="activity-img olahraga">
+            <img
+              src="foto/olahraga.jpeg"
+              alt="Olahraga Bersama"
+              loading="lazy"
+            />
+          </div>
+          <div class="activity-body">
+            <h3>Olahraga Bersama</h3>
+            <p>Futsal, badminton, berenang, dan fun sport untuk menjaga kesehatan dan mempererat kebersamaan.</p>
+          </div>
+        </div>
+
+        <div class="activity-card reveal" style="transition-delay:0.3s">
+          <div class="activity-img rohani">
+            <img
+              src="foto/sharing.jpeg"
+              alt="Sharing & Pendalaman Iman"
+              loading="lazy"
+            />
+          </div>
+          <div class="activity-body">
+            <h3>Sharing & Pendalaman Iman</h3>
+            <p>Diskusi Kitab Suci, sharing pengalaman iman, dan belajar ajaran Gereja Katolik bersama.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- DOKUMENTASI -->
+  <section id="dokumentasi">
+    <div class="section-inner">
+      <div class="reveal">
+        <p class="section-label">Galeri</p>
+        <h2 class="section-title">Dokumentasi <em>Kegiatan</em></h2>
+        <p style="color:rgba(245,230,200,0.6);margin-bottom:2rem;max-width:520px;line-height:1.7">
+          Setiap momen adalah kenangan berharga. Berikut cuplikan perjalanan OMK Kristus Raja Purwokerto.
+        </p>
+      </div>
+
+      <div class="gallery-grid reveal" style="transition-delay:0.2s" id="galleryGrid">
+
+        <div class="gallery-item" data-cat="misa" data-title="Dokumentasi Kegiatan" data-date="2022" data-full="foto/1.jpg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/1.jpg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2022</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="sosial" data-title="Dokumentasi Kegiatan" data-date="2022" data-full="foto/2.jpg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/2.jpg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2022</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="rekoleksi" data-title="Dokumentasi Kegiatan" data-date="2023" data-full="foto/11.jpeg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/11.jpeg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2023</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="misa" data-title="Dokumentasi Kegiatan" data-date="2022" data-full="foto/5.jpg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/5.jpg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2022</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="sosial" data-title="Dokumentasi Kegiatan" data-date="2023" data-full="foto/6.jpg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/6.jpg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2023</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="rekoleksi" data-title="Dokumentasi Kegiatan" data-date="2023" data-full="foto/7.jpeg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/7.jpeg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2023</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="olahraga" data-title="Dokumentasi Kegiatan" data-date="2023" data-full="foto/8.jpg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/8.jpg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2023</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="misa" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/9.jpg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/9.jpg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="sosial" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/10.jpeg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/10.jpeg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="rekoleksi" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/3.jpg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/3.jpg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="olahraga" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/12.jpeg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/12.jpeg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="misa" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/13.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/13.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="sosial" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/14.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/14.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="rekoleksi" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/15.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/15.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="olahraga" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/16.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/16.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="misa" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/17.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/17.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="sosial" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/18.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/18.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="rekoleksi" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/19.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/19.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="olahraga" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/20.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/20.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="misa" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/21.png">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/21.png" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+        <div class="gallery-item" data-cat="sosial" data-title="Dokumentasi Kegiatan" data-date="2026" data-full="foto/22.jpg">
+          <div class="gallery-item-inner"><img src="data:image/gif;base64,R0lGODlhAQABAAAAACH5BAEKAAEALAAAAAABAAEAAAICTAEAOw==" data-src="foto/22.jpg" alt="Kegiatan OMK" class="lazyload"></div>
+          <div class="overlay"><div class="overlay-zoom">🔍</div><div class="overlay-text">Kegiatan OMK</div><div class="overlay-sub">2026</div></div>
+        </div>
+
+      </div>
+
+      <p style="text-align:center;margin-top:1.5rem;font-size:0.8rem;color:rgba(245,230,200,0.35);letter-spacing:0.05em">
+        Dokumentasi kegiatan OMK Kristus Raja Purwokerto
+      </p>
+    </div>
+  </section>
+
+  <!-- KONTAK -->
+  <section id="kontak">
+    <div class="section-inner">
+      <div class="reveal" style="text-align:center;margin-bottom:1rem">
+        <p class="section-label" style="justify-content:center">Hubungi Kami</p>
+        <h2 class="section-title" style="text-align:center">Mari <em>Bergabung</em><br>Bersama Kami</h2>
+      </div>
+      <p class="contact-desc reveal" style="transition-delay:0.1s">
+        Terbuka untuk semua orang muda Katolik berusia 15–35 tahun. Tidak perlu formal — cukup datang dengan hati yang terbuka!
+      </p>
+
+      <div class="contact-grid reveal" style="transition-delay:0.2s">
+        <div class="contact-card">
+          <div class="icon">📍</div>
+          <h3>Alamat</h3>
+          <p>Gereja Katedral Kristus Raja<br>Jl. Jend. Sudirman, Purwokerto<br>Jawa Tengah</p>
+        </div>
+        <div class="contact-card">
+          <div class="icon">💬</div>
+          <h3>WhatsApp</h3>
+          <p>
+            Hubungi pengurus OMK via<br>
+            <a href="https://wa.me/62895410342444" target="_blank">+62 895-4103-42444</a><br>
+          </p>
+        </div>
+        <div class="contact-card">
+          <div class="icon">📸</div>
+          <h3>Instagram</h3>
+          <p>
+            Ikuti update kegiatan kami di<br>
+            <a href="https://www.instagram.com/omk3r/" target="_blank">@omk3r</a><br>
+          </p>
+        </div>
+      </div>
+
+      <div style="text-align:center;margin-top:3rem" class="reveal" style="transition-delay:0.3s">
+        <div style="display:inline-block;padding:2rem 3rem;border:1px solid rgba(201,151,58,0.2);border-radius:6px;max-width:480px">
+          <p style="color:rgba(245,230,200,0.5);font-size:0.8rem;letter-spacing:0.15em;text-transform:uppercase;margin-bottom:0.75rem">Pesan Pastoral</p>
+          <p style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:300;color:var(--gold-light);font-style:italic;line-height:1.6">
+            "Janganlah seorang pun menganggap engkau rendah karena engkau muda."
+          </p>
+          <p style="color:rgba(245,230,200,0.4);font-size:0.8rem;margin-top:0.75rem">— 1 Timotius 4:12</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- LIGHTBOX -->
+  <div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+    <div class="lightbox-inner">
+      <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+      <button class="lightbox-nav prev" onclick="navigateLightbox(-1)">‹</button>
+      <button class="lightbox-nav next" onclick="navigateLightbox(1)">›</button>
+      <div class="lightbox-img-wrap">
+        <img id="lightboxImg" src="" alt="">
+      </div>
+      <div class="lightbox-caption">
+        <h4 id="lightboxTitle"></h4>
+        <p id="lightboxDate"></p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p class="footer-copy">© 2025 <span>OMK Katedral Kristus Raja Purwokerto</span>. Dibuat dengan ❤️</p>
+    <ul class="footer-links">
+      <li><a href="#about">Tentang</a></li>
+      <li><a href="#kegiatan">Kegiatan</a></li>
+      <li><a href="#kontak">Kontak</a></li>
+    </ul>
+  </footer>
+
+  <script>
+    // ── Navbar scroll effect ──
+    const navbar = document.getElementById('navbar');
+    window.addEventListener('scroll', () => {
+      navbar.classList.toggle('scrolled', window.scrollY > 60);
+    });
+
+    // ── Mobile menu ──
+    function toggleMenu() {
+      document.getElementById('mobileMenu').classList.toggle('open');
+    }
+    document.getElementById('mobileMenu').querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        document.getElementById('mobileMenu').classList.remove('open');
+      });
+    });
+
+    // ── Reveal animations ──
+    const revealEls = document.querySelectorAll('.reveal');
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => {
+        if (e.isIntersecting) {
+          e.target.classList.add('visible');
+          revealObserver.unobserve(e.target);
+        }
+      });
+    }, { threshold: 0.12 });
+    revealEls.forEach(el => revealObserver.observe(el));
+
+    // ── Lazy load images ──
+    const lazyImages = document.querySelectorAll('img.lazyload');
+    const lazyObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const img = entry.target;
+          img.src = img.dataset.src;
+          img.onload = () => img.classList.add('loaded');
+          img.onerror = () => img.classList.add('loaded');
+          lazyObserver.unobserve(img);
+        }
+      });
+    }, { rootMargin: '200px 0px' });
+    lazyImages.forEach(img => lazyObserver.observe(img));
+
+    // ── Gallery filter ──
+    function filterGallery(cat, btn) {
+      document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      document.querySelectorAll('.gallery-item').forEach(item => {
+        const show = cat === 'semua' || item.dataset.cat === cat;
+        item.style.transition = 'opacity 0.4s, transform 0.4s';
+        item.style.opacity = show ? '1' : '0.12';
+        item.style.transform = show ? 'scale(1)' : 'scale(0.95)';
+        item.style.pointerEvents = show ? 'auto' : 'none';
+      });
+    }
+
+    // ── Lightbox ──
+    let currentIndex = 0;
+    function getVisibleItems() {
+      return Array.from(document.querySelectorAll('.gallery-item'))
+                  .filter(el => el.style.pointerEvents !== 'none');
+    }
+
+    function openLightbox(el) {
+      const items = getVisibleItems();
+      currentIndex = items.indexOf(el);
+      showLightboxItem(items, currentIndex);
+      document.getElementById('lightbox').classList.add('open');
+      document.body.style.overflow = 'hidden';
+    }
+
+    function showLightboxItem(items, index) {
+      const item = items[index];
+      if (!item) return;
+      const imgEl = item.querySelector('img');
+      const fullSrc = imgEl ? imgEl.dataset.src || imgEl.src : (item.dataset.full || '');
+
+      const lbImg = document.getElementById('lightboxImg');
+      lbImg.style.opacity = '0';
+      lbImg.src = fullSrc;
+      lbImg.onload = () => { lbImg.style.transition = 'opacity 0.3s'; lbImg.style.opacity = '1'; };
+      lbImg.onerror = () => { lbImg.style.opacity = '1'; };
+      lbImg.alt = item.dataset.title || '';
+      document.getElementById('lightboxTitle').textContent = item.dataset.title || '';
+      document.getElementById('lightboxDate').textContent = item.dataset.date || '';
+    }
+
+    function navigateLightbox(dir) {
+      const items = getVisibleItems();
+      currentIndex = (currentIndex + dir + items.length) % items.length;
+      showLightboxItem(items, currentIndex);
+    }
+
+    function closeLightbox() {
+      document.getElementById('lightbox').classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    function closeLightboxOutside(e) {
+      if (e.target === document.getElementById('lightbox')) closeLightbox();
+    }
+
+    document.addEventListener('keydown', e => {
+      const lb = document.getElementById('lightbox');
+      if (!lb.classList.contains('open')) return;
+      if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'ArrowRight') navigateLightbox(1);
+      if (e.key === 'ArrowLeft')  navigateLightbox(-1);
+    });
+
+    document.querySelectorAll('.gallery-item').forEach(item => {
+      item.addEventListener('click', () => openLightbox(item));
+    });
+
+    // ── Smooth scroll ──
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const target = document.querySelector(a.getAttribute('href'));
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+
+
+</body>
+</html>
